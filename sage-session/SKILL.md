@@ -269,7 +269,7 @@ Append one record. The bin validates fields, refuses secrets, and never prompts:
 ~/.claude/skills/pq/bin/pq-journal-log entries '{"skill":"pq-retro","summary":"hard morning, strong afternoon","triggers":["budget email","kids bedtime"],"saboteurs":["judge","controller"],"reps":40,"sage_win":"let the bedtime chaos be funny instead of a failure"}'
 ```
 
-Required: `skill` (which skill wrote this), `summary` (one or two sentences). Optional: `triggers` (array), `saboteurs` (array of ids), `reps` (day total if known), `sage_win` (one concrete moment the Sage ran the show).
+Required: `skill` (which skill wrote this), `summary` (one or two sentences). Optional: `triggers` (array), `saboteurs` (array of ids), `reps` (day total if known), `sage_win` (one concrete moment the Sage ran the show), `pq_self` (0-100, only when the user self-assesses — never computed for them).
 
 Write in the user's own words wherever a field allows it — "you always leave things until they rot" is a real lie worth keeping; a paraphrase is not. Keep each record one line.
 

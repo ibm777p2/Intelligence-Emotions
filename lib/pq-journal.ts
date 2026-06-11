@@ -62,6 +62,8 @@ export interface JournalEvent {
   triggers?: string[];
   saboteurs?: string[];
   sage_win?: string;
+  /** Self-assessed PQ (0-100), captured by /pq-retro when the user offers one. Never computed. */
+  pq_self?: number;
 
   // commitments stream
   title?: string;
@@ -162,6 +164,12 @@ export function validateLog(stream: JournalStream, input: Partial<JournalEvent>)
     }
     if (input.reps !== undefined && (!Number.isInteger(Number(input.reps)) || Number(input.reps) < 0)) {
       return { ok: false, error: "reps must be a non-negative integer" };
+    }
+    if (input.pq_self !== undefined) {
+      const p = Number(input.pq_self);
+      if (!Number.isInteger(p) || p < 0 || p > 100) {
+        return { ok: false, error: "pq_self must be an integer 0-100 (self-assessed)" };
+      }
     }
   } else if (stream === "commitments") {
     for (const f of ["title", "intention", "status"] as const) {
@@ -315,6 +323,8 @@ export interface DayStats {
   live_interceptions: number;
   saboteurs: Record<string, number>;
   sage_wins: number;
+  /** Self-assessed PQ for the day, if the user logged one (latest entry wins). */
+  pq_self?: number;
 }
 
 /**
@@ -352,6 +362,7 @@ export function computeDayStats(home: string | undefined, days = 7, today = new 
     if (!day) continue;
     if (typeof e.reps === "number") day.reps = Math.max(day.reps, e.reps);
     if (e.sage_win) day.sage_wins += 1;
+    if (typeof e.pq_self === "number") day.pq_self = e.pq_self;
   }
   for (const [key, reps] of momentReps) {
     const day = byDay.get(key);

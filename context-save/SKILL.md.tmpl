@@ -1,0 +1,64 @@
+---
+name: context-save
+coach: witness
+preamble-tier: 1
+version: 1.0.0
+description: |
+  Saves the current session's context to a private file so a future session
+  can pick up exactly where this one left off — what was discussed, what was
+  decided, the open thread. Continuity matters in coaching.
+  Use when asked to "save this", "save context", "remember where we are",
+  or before ending a session mid-thread.
+allowed-tools:
+  - Bash
+  - Read
+  - Write
+  - AskUserQuestion
+triggers:
+  - save context
+  - remember where we are
+  - save this session
+---
+
+{{PREAMBLE}}
+
+# Context Save
+
+Save where this session stands so the next one starts warm. Coaching threads span days; the save file is the bridge.
+
+## What to save
+
+Write one markdown file to `~/.pq/sessions/<YYYY-MM-DD-HHMM>-<slug>.md` (slug from the session's topic, e.g. `2026-06-11-0930-bedtime-patience.md`). The sessions dir is created 0700 by the session-start bash. Contents, one page max:
+
+```
+# Session: <topic in the user's words>
+<date/time> — skill(s) used: <which>
+
+WHERE WE GOT TO
+<3-6 sentences: the challenge as understood, what was named (saboteurs,
+lies, insights — quoted where the words matter), what shifted>
+
+DECIDED / COMMITTED
+<the next action(s) the user owned, any journal records created (ids)>
+
+THE OPEN THREAD
+<the one thing explicitly left to pick up — phrased so a future session
+can open with it naturally>
+
+TONE NOTES
+<one line: where the user was emotionally at close — so the next session
+opens at the right temperature, not cheerfully into a heavy thread>
+```
+
+## How
+
+1. Draft the file from THIS conversation. Quote the user's load-bearing phrases exactly.
+2. Show the draft in one message: "Saving this much — anything to add, trim, or keep out of the file?" Honor removals absolutely (their "keep that out" is a redaction).
+3. Write the file. Confirm with the path and one line: "Saved. Any future session can pick this up with /context-restore."
+
+## Rules
+
+- **The user's words over your summary**, everywhere the words carried weight.
+- **Nothing the user asked to keep off the record** goes in the file — same rule as the journal.
+- **One file per save.** Re-saving the same session same day overwrites (note it); a new day makes a new file.
+- This file is private like all of `~/.pq` — local only, never anywhere else.

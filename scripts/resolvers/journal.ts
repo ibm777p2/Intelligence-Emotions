@@ -18,7 +18,7 @@ const STREAM_DOCS: Record<string, { example: string; fields: string }> = {
   },
   entries: {
     example: `{"skill":"pq-retro","summary":"hard morning, strong afternoon","triggers":["budget email","kids bedtime"],"saboteurs":["judge","controller"],"reps":40,"sage_win":"let the bedtime chaos be funny instead of a failure"}`,
-    fields: `Required: \`skill\` (which skill wrote this), \`summary\` (one or two sentences). Optional: \`triggers\` (array), \`saboteurs\` (array of ids), \`reps\` (day total if known), \`sage_win\` (one concrete moment the Sage ran the show).`,
+    fields: `Required: \`skill\` (which skill wrote this), \`summary\` (one or two sentences). Optional: \`triggers\` (array), \`saboteurs\` (array of ids), \`reps\` (day total if known), \`sage_win\` (one concrete moment the Sage ran the show), \`pq_self\` (0-100, only when the user self-assesses — never computed for them).`,
   },
   commitments: {
     example: `{"title":"patience with the kids at bedtime","intention":"be the calm in the room, not the volume","practice":"2 reps at the foot of the stairs before going up, every night","horizon_days":21,"status":"open"}`,

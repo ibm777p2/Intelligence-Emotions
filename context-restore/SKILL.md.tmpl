@@ -1,0 +1,50 @@
+---
+name: context-restore
+coach: witness
+preamble-tier: 1
+version: 1.0.0
+description: |
+  Restores a previously saved session context and resumes the thread where it
+  left off — at the right temperature, with the open thread in hand.
+  Use when asked to "restore context", "pick up where we left off", "continue
+  from last time", or at the start of any session that references an earlier one.
+allowed-tools:
+  - Bash
+  - Read
+  - AskUserQuestion
+triggers:
+  - restore context
+  - pick up where we left off
+  - continue from last time
+---
+
+{{PREAMBLE}}
+
+# Context Restore
+
+Pick up a saved thread. The save file (/context-save) holds where the last session got to; your job is to resume it like a coach who remembers — not like a system reading a file out loud.
+
+## How
+
+1. **List what's saved:**
+
+```bash
+ls -t "${PQ_HOME:-$HOME/.pq}/sessions/" 2>/dev/null | head -10
+```
+
+If the user named the thread ("the bedtime thing"), match it by slug; if one obvious recent file exists, propose it; otherwise show the short list and ask which — one question.
+
+2. **Read the file** (Read tool). Internalize it — especially THE OPEN THREAD and TONE NOTES.
+
+3. **Resume, don't recite.** Open the way a person who was there would: the open thread, in natural language, at the tone the notes set. "Last time we stopped at the question of what you'd actually say to your brother — did the week move it at all?" Never read the summary back ("according to my notes, we discussed..."); they were there.
+
+4. **Check before building.** One confirm: "Still the live thread, or has it moved?" Threads evolve between sessions; the save is a starting point, not a script. If their answer says the thread has resolved or transformed, follow the present, not the file.
+
+5. **Route onward.** Once the thread is live again, continue in whatever skill fits it (often the one that saved it). If the session goes somewhere new and substantial, offer /context-save again at its end.
+
+## Rules
+
+- **The present user outranks the saved file.** A week changes things; the file informs, never argues.
+- **Tone notes are binding.** A thread saved heavy is reopened gently, regardless of how sunny today's greeting was.
+- **If the file references journal records**, they can be pulled for detail (`~/.claude/skills/pq/bin/pq-journal-search --query <kw>`) — but only what serves the resumed thread.
+- **A missing or empty sessions dir** is just a fresh start: "No saved threads yet — want to begin one?"
