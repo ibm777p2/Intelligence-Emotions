@@ -1,0 +1,64 @@
+#!/usr/bin/env bun
+/**
+ * pq-config — read/write ~/.pq/config.yaml (flat key: value YAML).
+ *
+ * Usage:
+ *   pq-config get <key>          prints the value (empty + exit 1 if unset)
+ *   pq-config set <key> <value>  persists, creating the file (0600) if needed
+ *   pq-config list               prints the whole config
+ *
+ * Known keys: name, wake_time, rep_target, checkin_cadence, explain_level.
+ * Unknown keys are allowed (skills may grow new preferences) but get a note
+ * on stderr so typos don't silently become config.
+ */
+
+import { existsSync, readFileSync, writeFileSync, mkdirSync, chmodSync } from "fs";
+import { join, dirname } from "path";
+import { homedir } from "os";
+
+const KNOWN_KEYS = ["name", "wake_time", "rep_target", "checkin_cadence", "explain_level"];
+
+const configPath = join(process.env.PQ_HOME || join(homedir(), ".pq"), "config.yaml");
+
+function readConfig(): Map<string, string> {
+  const map = new Map<string, string>();
+  if (!existsSync(configPath)) return map;
+  for (const line of readFileSync(configPath, "utf-8").split("\n")) {
+    const m = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
+    if (m) map.set(m[1], m[2].trim());
+  }
+  return map;
+}
+
+function writeConfig(map: Map<string, string>): void {
+  mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 });
+  const body = [...map.entries()].map(([k, v]) => `${k}: ${v}`).join("\n") + "\n";
+  writeFileSync(configPath, body, { encoding: "utf-8", mode: 0o600 });
+  try { chmodSync(configPath, 0o600); } catch { /* best-effort */ }
+}
+
+const [cmd, key, ...valueParts] = process.argv.slice(2);
+
+if (cmd === "get" && key) {
+  const v = readConfig().get(key);
+  if (v === undefined || v === "") process.exit(1);
+  console.log(v);
+} else if (cmd === "set" && key && valueParts.length > 0) {
+  const value = valueParts.join(" ").trim();
+  if (/[\n\r]/.test(value)) {
+    process.stderr.write("pq-config: value must be a single line\n");
+    process.exit(1);
+  }
+  if (!KNOWN_KEYS.includes(key)) {
+    process.stderr.write(`pq-config: note — "${key}" is not a standard key (${KNOWN_KEYS.join(", ")}); storing anyway\n`);
+  }
+  const map = readConfig();
+  map.set(key, value);
+  writeConfig(map);
+  console.log(`${key}: ${value}`);
+} else if (cmd === "list") {
+  for (const [k, v] of readConfig()) console.log(`${k}: ${v}`);
+} else {
+  process.stderr.write("usage: pq-config get <key> | set <key> <value> | list\n");
+  process.exit(1);
+}

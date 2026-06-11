@@ -1,0 +1,97 @@
+#!/usr/bin/env bun
+/**
+ * pq-journal-search — read the journal. Active records only (superseded and
+ * redacted records never resurface).
+ *
+ * Usage:
+ *   pq-journal-search [--stream entries|saboteurs|commitments] [--recent N]
+ *                     [--days N] [--saboteur <id>] [--status <s>]
+ *                     [--query <keyword>] [--json] [--stats]
+ *
+ * With no --stream, searches all three streams (newest first across streams).
+ * --stats prints per-day aggregates (reps, interceptions, saboteur tallies,
+ * sage wins) for the last N days (--days, default 7) — the /pq-score dataset.
+ */
+
+import {
+  journalPaths, readEvents, computeActive, computeDayStats,
+  JOURNAL_STREAMS, type JournalStream, type ActiveRecord,
+} from "../lib/pq-journal";
+import { flagValue } from "../lib/bin-context";
+
+const args = process.argv.slice(2);
+const streamArg = flagValue(args, "--stream") as JournalStream | undefined;
+const recent = flagValue(args, "--recent");
+const days = flagValue(args, "--days");
+const saboteur = flagValue(args, "--saboteur");
+const status = flagValue(args, "--status");
+const query = flagValue(args, "--query");
+const asJson = args.includes("--json");
+const stats = args.includes("--stats");
+
+if (streamArg && !JOURNAL_STREAMS.includes(streamArg)) {
+  process.stderr.write(`pq-journal-search: unknown stream "${streamArg}"; use ${JOURNAL_STREAMS.join(" | ")}\n`);
+  process.exit(1);
+}
+
+if (stats) {
+  const n = days ? parseInt(days, 10) : 7;
+  const out = computeDayStats(undefined, n);
+  if (asJson) {
+    console.log(JSON.stringify(out));
+  } else {
+    for (const d of out) {
+      const sabs = Object.entries(d.saboteurs).map(([k, v]) => `${k}×${v}`).join(" ") || "-";
+      console.log(`${d.date}  reps=${d.reps}  interceptions=${d.interceptions} (live ${d.live_interceptions})  sage_wins=${d.sage_wins}  ${sabs}`);
+    }
+  }
+  process.exit(0);
+}
+
+const streams: JournalStream[] = streamArg ? [streamArg] : [...JOURNAL_STREAMS];
+let records: Array<ActiveRecord & { stream: JournalStream }> = [];
+for (const s of streams) {
+  for (const r of computeActive(readEvents(journalPaths(s)))) {
+    records.push({ ...r, stream: s });
+  }
+}
+
+if (days) {
+  const n = parseInt(days, 10);
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - n);
+  const cutoffIso = cutoff.toISOString();
+  records = records.filter((r) => r.date >= cutoffIso);
+}
+if (saboteur) {
+  records = records.filter(
+    (r) => r.saboteur === saboteur || (Array.isArray(r.saboteurs) && r.saboteurs.includes(saboteur)),
+  );
+}
+if (status) {
+  records = records.filter((r) => r.status === status);
+}
+if (query) {
+  const q = query.toLowerCase();
+  records = records.filter((r) => JSON.stringify(r).toLowerCase().includes(q));
+}
+
+records.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)); // newest first
+if (recent) records = records.slice(0, parseInt(recent, 10));
+
+if (asJson) {
+  console.log(JSON.stringify(records));
+} else if (records.length === 0) {
+  console.log("(no journal records match)");
+} else {
+  for (const r of records) {
+    const day = (r.date || "").slice(0, 10);
+    if (r.stream === "saboteurs") {
+      console.log(`${day} [saboteur] ${r.saboteur} — trigger: ${r.trigger} — lie: "${r.lie}"${r.response ? ` — did: ${r.response}` : ""}${typeof r.reps === "number" ? ` (${r.reps} reps)` : ""} (id ${r.id.slice(0, 8)})`);
+    } else if (r.stream === "entries") {
+      console.log(`${day} [entry/${r.skill}] ${r.summary}${r.sage_win ? ` — sage win: ${r.sage_win}` : ""}${typeof r.reps === "number" ? ` (${r.reps} reps)` : ""} (id ${r.id.slice(0, 8)})`);
+    } else {
+      console.log(`${day} [commitment/${r.status}] ${r.title} — ${r.intention}${r.practice ? ` — practice: ${r.practice}` : ""} (id ${r.id.slice(0, 8)})`);
+    }
+  }
+}
