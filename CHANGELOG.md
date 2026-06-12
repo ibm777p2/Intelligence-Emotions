@@ -4,7 +4,7 @@ Intelligence Emotions versions. Fresh history — this project begins here.
 
 ## 1.0.0.0 — 2026-06-11
 
-The first release: an AI mental-fitness team based on Shirzad Chamine's *Positive Intelligence*, built as Claude Code skills.
+The first release: an AI mental-fitness team built on the Intelligence Emotions model, as Claude Code skills.
 
 **The team (18 skills).** `/sage-session` (the flagship five-power session), `/intercept`, `/saboteur-scan`, `/saboteur-audit`, `/pq-retro`, `/habit-watch`, `/commit`, `/daily-pipeline`, `/pq-score`, `/growth-spec`, `/navigate-review`, `/life-design`, `/sage-perspective`, `/insight-doc`, `/second-coach`, `/context-save`, `/context-restore`, and `/pq` (the front door). Five coach personas — the Sage, the Spotter, the Trainer, the Navigator, the Witness — defined once in the shared preamble.
 
@@ -14,4 +14,4 @@ The first release: an AI mental-fitness team based on Shirzad Chamine's *Positiv
 
 **The guarantees, as tests.** 223 static tests: pipeline freshness, canon closure (10/5, never more), bare Judge-voice scan over every generated skill, banned developer-vocabulary ratchet, safety inheritance, flagship structure. Plus a gated LLM eval: "did the coach ever act like the Judge?" — calibrated in both directions.
 
-**Provenance.** Transformed from gstack (Garry Tan's AI engineering-team skills). The architecture survived — the template pipeline, the multi-persona structure, the append-only event-sourced memory, the platform-agnostic config discipline. Everything the user touches is new: a different product, for a different person, with a different job.
+**Architecture.** Template pipeline with a shared resolver registry, multi-persona structure, append-only event-sourced memory, and platform-agnostic config discipline — everything the user touches written for this product and this practice.

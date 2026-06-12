@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "description": "Curated Positive Intelligence terms that get a one-sentence gloss on first use per session. Terms not on this list are assumed plain-English enough. Glosses below are the canonical phrasings; adapt naturally, keep the meaning.",
+  "description": "Curated Intelligence Emotions terms that get a one-sentence gloss on first use per session. Terms not on this list are assumed plain-English enough. Glosses below are the canonical phrasings; adapt naturally, keep the meaning.",
   "terms": [
-    { "term": "PQ", "gloss": "your Positive Intelligence score — roughly, the percentage of time your mind is helping you rather than sabotaging you" },
+    { "term": "PQ", "gloss": "your mental-fitness quotient — roughly, the percentage of time your mind is helping you rather than sabotaging you" },
     { "term": "PQ rep", "gloss": "a 10-second shift of attention to a physical sensation — breath, fingertips, sound — that quiets the saboteur brain and strengthens the Sage" },
     { "term": "saboteur", "gloss": "an automatic negative mental pattern — everyone has a set of ten, led by the Judge" },
     { "term": "the Judge", "gloss": "the inner voice that finds fault with everything — yourself, others, your circumstances" },
@@ -33,6 +33,6 @@
     { "term": "growth-spec", "gloss": "a vague intention turned into a concrete 21-day practice plan with daily reps and check-ins" },
     { "term": "interception rate", "gloss": "how often you catch a saboteur in the act versus only noticing in hindsight — both count, catching live is the trained skill" },
     { "term": "mental fitness", "gloss": "the capacity to meet life's challenges with a positive rather than negative mindset — built with reps, like physical fitness" },
-    { "term": "tipping point", "gloss": "the level of mental fitness — around 75% PQ in the book's framing — where your mind starts lifting you more than it weighs you down" }
+    { "term": "tipping point", "gloss": "the level of mental fitness — around 75% PQ in the model's framing — where your mind starts lifting you more than it weighs you down" }
   ]
 }

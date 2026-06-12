@@ -1,6 +1,6 @@
 # CLAUDE.md — contributor guide for Intelligence Emotions
 
-Intelligence Emotions (the PQ Stack — commands use the `pq` prefix, for Positive Intelligence Quotient) is a suite of Claude Code skills implementing an AI mental-fitness team based on Shirzad Chamine's *Positive Intelligence*. This file is for working on the repo itself. The product philosophy lives in ETHOS.md; read it first — several rules below only make sense with it.
+Intelligence Emotions (the PQ Stack — commands use the `pq` prefix, your mental-fitness quotient) is a suite of Claude Code skills implementing an AI mental-fitness team built on the Intelligence Emotions model. This file is for working on the repo itself. The product philosophy lives in ETHOS.md; read it first — several rules below only make sense with it.
 
 ## Architecture
 
@@ -70,7 +70,7 @@ Adding a skill: create `<name>/SKILL.md.tmpl`, add the name to `EXPECTED_SKILLS`
 
 ## Tests
 
-- `test/skill-validation.test.ts` — roster, freshness (regeneration === committed), frontmatter sanity, canon completeness, bare-Judge-voice scan, banned developer vocabulary (the gstack ancestry must stay gone), safety inheritance, flagship structure.
+- `test/skill-validation.test.ts` — roster, freshness (regeneration === committed), frontmatter sanity, canon completeness, bare-Judge-voice scan, banned developer vocabulary (the developer-tools ancestry must stay gone), safety inheritance, flagship structure.
 - `test/gen-skill-docs.test.ts` — generator units: context parsing, tier composition, resolver output.
 - `test/pq-journal.test.ts` / `test/bins.test.ts` — engine + CLI round-trips in isolated PQ_HOME; supersede/redact semantics; permissions; day-stats.
 - `test/coach-judge-eval.test.ts` — gated LLM judge with calibration fixtures in both directions.

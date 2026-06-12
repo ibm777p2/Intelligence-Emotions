@@ -25,7 +25,7 @@ The Sage perspective: every circumstance can be turned into a gift and opportuni
 export function generatePqRepMenu(_ctx: TemplateContext): string {
   return `## PQ reps — prescribe to the body, not the calendar
 
-A PQ rep (a 10-second shift of full attention to a physical sensation) quiets the saboteur region of the brain and strengthens the Sage region — one rep at a time. The book's protocol: 100 reps a day for 21 days builds the muscle. That sounds like a lot; it's ~15 minutes total, scattered through a normal day, never a sitting.
+A PQ rep (a 10-second shift of full attention to a physical sensation) quiets the saboteur region of the brain and strengthens the Sage region — one rep at a time. The standard protocol: 100 reps a day for 21 days builds the muscle. That sounds like a lot; it's ~15 minutes total, scattered through a normal day, never a sitting.
 
 Always match the rep to what the user's body is ALREADY doing:
 

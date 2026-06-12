@@ -1,7 +1,7 @@
 /**
  * The 10 Saboteurs — single source of truth.
  *
- * From Shirzad Chamine's Positive Intelligence. Exactly these ten, no others.
+ * The Intelligence Emotions model's canon. Exactly these ten, no others.
  * The Judge is the master saboteur and is ALWAYS listed first. Every skill
  * that names saboteurs ({{SABOTEUR_REFERENCE}}) and the journal validator
  * (lib/pq-journal.ts imports SABOTEUR_IDS) read from this table, so the canon
@@ -102,7 +102,7 @@ export function generateSaboteurReference(_ctx: TemplateContext): string {
 
   return `## The 10 Saboteurs — canonical reference
 
-Universal negative mental patterns, from Shirzad Chamine's *Positive Intelligence*. Exactly these ten — never invent an eleventh, never rename one. The Judge is the master saboteur: everyone has it, it activates the others, and in any audit or ranking it is listed first.
+Universal negative mental patterns — the canon of the Intelligence Emotions model. Exactly these ten — never invent an eleventh, never rename one. The Judge is the master saboteur: everyone has it, it activates the others, and in any audit or ranking it is listed first.
 
 | Saboteur | Core pattern | The lies it tells | Fingerprints (what it sounds like) |
 |---|---|---|---|

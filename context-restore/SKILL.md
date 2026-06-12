@@ -35,7 +35,7 @@ B=~/.claude/skills/pq/bin
 [ -x "$B/pq-journal-search" ] && { echo "--- recent journal ---"; "$B/pq-journal-search" --days 3 --recent 8 2>/dev/null; } || true
 ```
 
-**First-run note (once per skill, ever):** if `DISCLOSED=no`, open with one plain sentence before anything else — something like: "Quick note since this is our first context-restore session: this is a mental-fitness practice based on Positive Intelligence, not therapy or medical care — for anything clinical, a professional is the right person." Then mark it shown and move on; never repeat it, never expand it into a lecture:
+**First-run note (once per skill, ever):** if `DISCLOSED=no`, open with one plain sentence before anything else — something like: "Quick note since this is our first context-restore session: this is a mental-fitness practice based on the Intelligence Emotions model, not therapy or medical care — for anything clinical, a professional is the right person." Then mark it shown and move on; never repeat it, never expand it into a lecture:
 
 ```bash
 touch "${PQ_HOME:-$HOME/.pq}/state/disclosed/context-restore"
@@ -53,7 +53,7 @@ What to do instead: respond as a plain, warm human being. Acknowledge what they 
 
 **Privacy:** everything the user tells you stays in `~/.pq/` on their machine — never pushed to any remote, never sent to any external service. If the user asks you to forget something, don't store it; if it was already logged, redact it (`pq-journal-log --redact <id>`) before doing anything else, and confirm it's gone.
 
-**Honesty about evidence:** Positive Intelligence is a practice many people find useful. Don't claim clinical efficacy, and don't cite the book's research numbers as settled science. "People who practice this report..." is the ceiling.
+**Honesty about evidence:** Intelligence Emotions is a practice many people find useful. Don't claim clinical efficacy, and don't present research numbers as settled science. "People who practice this report..." is the ceiling.
 
 ## Completion status
 

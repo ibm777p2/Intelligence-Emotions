@@ -1,16 +1,14 @@
 # Intelligence Emotions
 
-> "Your mind is your best friend. But it can also be your worst enemy." — Shirzad Chamine, *Positive Intelligence*
+Your mind is your best friend — and, left unsupervised, your worst critic.
 
-Intelligence Emotions turns Claude Code into your personal mental-fitness team, built on the Positive Intelligence model from Chamine's book. Five coaches, one practice: catch the ten saboteurs (led by the Judge — the inner voice that finds fault with everything), do PQ reps (10-second shifts of attention to a physical sensation), and let the Sage choose the response. The team remembers between sessions — a private, local-only journal that makes every coach smarter about your actual patterns.
-
-This started life as a fork of [Garry Tan's gstack](https://github.com/garrytan/gstack), an AI engineering team for shipping code. The architecture survived — the skill pipeline, the persona system, the append-only memory. The product is entirely different: the user is no longer a founder shipping features; they're a person building mental fitness, ten seconds at a time.
+Intelligence Emotions turns Claude Code into your personal mental-fitness team, built on the Intelligence Emotions model. Five coaches, one practice: catch the ten saboteurs (led by the Judge — the inner voice that finds fault with everything), do PQ reps (10-second shifts of attention to a physical sensation), and let the Sage choose the response. The team remembers between sessions — a private, local-only journal that makes every coach smarter about your actual patterns.
 
 This is not therapy or medical care. The coaches say so themselves, once, plainly — and they know when to stop coaching and point you to a professional instead.
 
 **Who this is for:**
-- **Anyone who read *Positive Intelligence*** and wants the practice to actually happen daily
-- **First-time mental-fitness practitioners** — structured coaching instead of a blank journal
+- **Anyone building mental fitness** who wants the practice to actually happen daily
+- **First-time practitioners** — structured coaching instead of a blank journal
 - **People with a challenge they keep circling** — a habit, a conflict, a decision that won't resolve
 
 ## Quick start
@@ -32,7 +30,7 @@ Open Claude Code and paste this. Claude does the rest.
 
 > Install Intelligence Emotions: run **`git clone --single-branch --depth 1 https://github.com/YOUR-GITHUB-USERNAME/intelligence-emotions.git ~/.claude/skills/pq && cd ~/.claude/skills/pq && ./setup`** then add an "Intelligence Emotions" section to CLAUDE.md that lists the available skills: /pq, /sage-session, /intercept, /saboteur-scan, /sage-perspective, /navigate-review, /pq-retro, /daily-pipeline, /growth-spec, /commit, /pq-score, /habit-watch, /life-design, /saboteur-audit, /insight-doc, /second-coach, /context-save, /context-restore — and says that /pq is the front door when unsure which to use.
 
-(The skills use the `pq` prefix — Positive Intelligence Quotient, the book's name for the percentage of time your mind serves you rather than sabotages you.)
+(The skills use the `pq` prefix — your mental-fitness quotient, the percentage of time your mind serves you rather than sabotages you.)
 
 ### Step 2: First session
 
@@ -160,4 +158,4 @@ Exactly 10 saboteurs. Exactly 5 Sage powers. Never an invented eleventh or sixth
 
 ## License
 
-MIT. The Positive Intelligence model — the saboteurs, the Sage powers, PQ reps — is Shirzad Chamine's work; [read the book](https://www.positiveintelligence.com/book/), it's the manual this team coaches from. Architecture forked from [gstack](https://github.com/garrytan/gstack) (MIT), gratefully.
+MIT — see [LICENSE](LICENSE).
