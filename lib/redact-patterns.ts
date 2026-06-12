@@ -1,12 +1,10 @@
 /**
  * redact-patterns — the canonical redaction taxonomy.
  *
- * Single source of truth shared by `lib/redact-engine.ts`, `bin/gstack-redact`,
- * `bin/gstack-redact-prepush`, and (via `scripts/resolvers/redact-doc.ts`) the
- * generated SKILL.md docs for /spec, /ship, /cso, /document-release, and
- * /document-generate.
+ * Single source of truth consumed by `lib/redact-engine.ts` and, through it,
+ * the journal write-guard in `lib/pq-journal.ts`.
  *
- * Design notes (locked in /plan-eng-review + two Codex passes):
+ * Design notes (inherited from the ancestor project's review process):
  *
  *   - Three tiers. HIGH = genuinely-secret credentials (block). MEDIUM = PII,
  *     legal/damaging, internal-leak, plus credential-shaped patterns that have
@@ -143,7 +141,7 @@ function looksLikeWallet(span: string): boolean {
 /**
  * A finding is suppressed only if the MATCHED SPAN itself is a placeholder
  * form — not merely co-located on a line with the word EXAMPLE. This is the
- * tightened rule from the Codex review (line-based suppression was dangerous).
+ * tightened during the ancestor project's review (line-based suppression was dangerous).
  */
 // Structural placeholder forms — apply to ANY span (including URLs).
 const PLACEHOLDER_STRUCTURAL = [

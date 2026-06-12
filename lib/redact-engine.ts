@@ -1,10 +1,11 @@
 /**
  * redact-engine — pure scanning + auto-redaction over the shared taxonomy.
  *
- * No I/O. Deterministic. The CLI shim (`bin/gstack-redact`), the pre-push hook
- * (`bin/gstack-redact-prepush`), and tests all import from here.
+ * No I/O. Deterministic. The journal engine (`lib/pq-journal.ts`) and tests
+ * import from here; its job in PQ Stack is blocking credential-shaped secrets
+ * at journal-write time. There are no external sinks to guard — by design.
  *
- * Key behaviors (locked in /plan-eng-review + two Codex passes):
+ * Key behaviors (inherited from the ancestor project, audited):
  *   - Normalization BEFORE matching (NFKC + strip zero-width + decode a small
  *     set of HTML entities) so Unicode-confusable / zero-width evasion fails.
  *     Findings map back to ORIGINAL offsets via an index map.

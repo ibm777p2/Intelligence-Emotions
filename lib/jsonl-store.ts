@@ -1,5 +1,5 @@
 /**
- * jsonl-store — shared, audited plumbing for gstack's append-only JSONL stores.
+ * jsonl-store — shared, audited plumbing for PQ Stack's append-only JSONL stores.
  *
  * Single source of truth for the three things every JSONL store must get right:
  *   1. Injection sanitization (the prompt-injection patterns that must NOT survive
@@ -8,10 +8,9 @@
  *   3. Tolerant read (a partially-written tail or one corrupt line must not take
  *      down the whole read).
  *
- * Extracted from `bin/gstack-learnings-log` (D2A) so `gstack-learnings-*` and the
- * new `gstack-decision-*` bins share ONE audited path — a new injection pattern or
- * a write-atomicity fix lands in both at once, never drifts. Per the
- * `squash-with-regen` / DRY discipline + the eng-review D2A decision.
+ * Inherited from the ancestor project's audited store and kept as the ONE path
+ * every journal stream writes through — a new injection pattern or a
+ * write-atomicity fix lands everywhere at once, never drifts.
  */
 
 import { appendFileSync, readFileSync, existsSync } from "fs";
