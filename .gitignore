@@ -6,3 +6,4 @@ node_modules/
 *.bun-build
 /tmp/
 .pq/
+.DS_Store
