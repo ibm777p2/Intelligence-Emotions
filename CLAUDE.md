@@ -1,6 +1,6 @@
-# CLAUDE.md — contributor guide for PQ Stack
+# CLAUDE.md — contributor guide for Intelligence Emotions
 
-PQ Stack is a suite of Claude Code skills implementing an AI mental-fitness team based on Shirzad Chamine's *Positive Intelligence*. This file is for working on the repo itself. The product philosophy lives in ETHOS.md; read it first — several rules below only make sense with it.
+Intelligence Emotions (the PQ Stack — commands use the `pq` prefix, for Positive Intelligence Quotient) is a suite of Claude Code skills implementing an AI mental-fitness team based on Shirzad Chamine's *Positive Intelligence*. This file is for working on the repo itself. The product philosophy lives in ETHOS.md; read it first — several rules below only make sense with it.
 
 ## Architecture
 

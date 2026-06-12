@@ -1,6 +1,6 @@
 # Changelog
 
-PQ Stack versions. Fresh history — this project begins here.
+Intelligence Emotions versions. Fresh history — this project begins here.
 
 ## 1.0.0.0 — 2026-06-11
 

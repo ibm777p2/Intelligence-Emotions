@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# PQ Stack setup — installs the coaching skills into ~/.claude/skills/
-# and prepares the private data home at ~/.pq.
+# Intelligence Emotions setup — installs the coaching skills into
+# ~/.claude/skills/ and prepares the private data home at ~/.pq.
 #
 # Usage:
 #   ./setup              install (or refresh) all skills
@@ -42,7 +42,7 @@ if [[ "${1:-}" == "--uninstall" ]]; then
       esac
     fi
   done
-  say "Removed $removed PQ Stack symlinks from $SKILLS_DIR."
+  say "Removed $removed Intelligence Emotions symlinks from $SKILLS_DIR."
   say "Your journal and config in $PQ_HOME were not touched (and never will be by this script)."
   exit 0
 fi
@@ -67,6 +67,16 @@ mkdir -p "$SKILLS_DIR"
 
 link_skill() {
   local name="$1" target="$2" link="$SKILLS_DIR/$1"
+  # Already the right thing (e.g. the repo was cloned straight to ~/.claude/skills/pq,
+  # the install path the README recommends) — nothing to do.
+  if [[ -e "$link" ]]; then
+    local resolved; resolved="$(cd "$link" 2>/dev/null && pwd -P || true)"
+    if [[ "$resolved" == "$(cd "$target" 2>/dev/null && pwd -P)" ]]; then
+      [[ -L "$link" ]] && { rm "$link"; ln -s "$target" "$link"; }
+      say "  ok   /$name"
+      return 0
+    fi
+  fi
   if [[ -L "$link" ]]; then
     rm "$link"
   elif [[ -e "$link" ]]; then
@@ -77,7 +87,7 @@ link_skill() {
   say "  ok   /$name"
 }
 
-say "Installing PQ Stack skills into $SKILLS_DIR:"
+say "Installing Intelligence Emotions skills into $SKILLS_DIR:"
 link_skill pq "$REPO_DIR" || true
 for name in "${SKILLS[@]}"; do
   link_skill "$name" "$REPO_DIR/$name" || true
@@ -91,7 +101,7 @@ else
 fi
 
 say ""
-say "PQ Stack is installed. Your team:"
+say "Intelligence Emotions is installed. Your team:"
 say "  /sage-session     the Sage — work through any life challenge (start here)"
 say "  /intercept        the Spotter — trace one stinging thought to its saboteur"
 say "  /saboteur-scan    the Spotter — report-only scan of a draft or entry"

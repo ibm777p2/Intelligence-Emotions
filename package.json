@@ -1,7 +1,7 @@
 {
-  "name": "pq-stack",
+  "name": "intelligence-emotions",
   "version": "1.0.0",
-  "description": "PQ Stack — your AI mental-fitness team, based on Shirzad Chamine's Positive Intelligence. Five coaches, one practice: catch the saboteurs, do the reps, let the Sage drive.",
+  "description": "Intelligence Emotions — your AI mental-fitness team, based on Shirzad Chamine's Positive Intelligence. Five coaches, one practice: catch the saboteurs, do the reps, let the Sage drive.",
   "license": "MIT",
   "type": "module",
   "scripts": {

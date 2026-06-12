@@ -1,100 +1,163 @@
-# PQ Stack
+# Intelligence Emotions
 
-Your AI mental-fitness team, as a suite of Claude Code skills — based on Shirzad Chamine's *Positive Intelligence*. Five coaches, one practice: catch the saboteurs, do the reps, let the Sage drive.
+> "Your mind is your best friend. But it can also be your worst enemy." — Shirzad Chamine, *Positive Intelligence*
 
-PQ Stack is a self-improvement tool, not therapy or medical care. It says so itself, once, the first time you run each skill — and it knows when to stop coaching and suggest a professional instead.
+Intelligence Emotions turns Claude Code into your personal mental-fitness team, built on the Positive Intelligence model from Chamine's book. Five coaches, one practice: catch the ten saboteurs (led by the Judge — the inner voice that finds fault with everything), do PQ reps (10-second shifts of attention to a physical sensation), and let the Sage choose the response. The team remembers between sessions — a private, local-only journal that makes every coach smarter about your actual patterns.
 
-## The idea, in one paragraph
+This started life as a fork of [Garry Tan's gstack](https://github.com/garrytan/gstack), an AI engineering team for shipping code. The architecture survived — the skill pipeline, the persona system, the append-only memory. The product is entirely different: the user is no longer a founder shipping features; they're a person building mental fitness, ten seconds at a time.
 
-Your mind runs ten universal negative patterns — the **saboteurs**, led by the **Judge** (the inner voice that finds fault with everything). The practice is a three-step loop: **intercept and label** the saboteur ("ah, that's my Judge"), do a **PQ rep** (a 10-second shift of attention to a physical sensation — fingertips, breath, sound), then engage a **Sage power** (Empathize, Explore, Innovate, Navigate, or Activate). Reps build the muscle the way sets build a squat: the book's protocol is 100 a day for 21 days, ten seconds at a time. PQ Stack gives you a team that runs this practice with you, daily, and remembers.
+This is not therapy or medical care. The coaches say so themselves, once, plainly — and they know when to stop coaching and point you to a professional instead.
 
-## Your team
+**Who this is for:**
+- **Anyone who read *Positive Intelligence*** and wants the practice to actually happen daily
+- **First-time mental-fitness practitioners** — structured coaching instead of a blank journal
+- **People with a challenge they keep circling** — a habit, a conflict, a decision that won't resolve
 
-| Command | Coach | What it does |
+## Quick start
+
+1. Install Intelligence Emotions (30 seconds — see below)
+2. Run `/sage-session` — bring one real challenge
+3. Run `/intercept` the next time a thought stings
+4. Run `/pq-retro` tonight before closing the laptop
+5. Run `/pq-score` after three days of journal data
+6. Stop there. You'll know if this is for you.
+
+## Install — 30 seconds
+
+**Requirements:** [Claude Code](https://docs.claude.com/en/docs/claude-code), [Git](https://git-scm.com/), [Bun](https://bun.sh/) v1.0+
+
+### Step 1: Install on your machine
+
+Open Claude Code and paste this. Claude does the rest.
+
+> Install Intelligence Emotions: run **`git clone --single-branch --depth 1 https://github.com/YOUR-GITHUB-USERNAME/intelligence-emotions.git ~/.claude/skills/pq && cd ~/.claude/skills/pq && ./setup`** then add an "Intelligence Emotions" section to CLAUDE.md that lists the available skills: /pq, /sage-session, /intercept, /saboteur-scan, /sage-perspective, /navigate-review, /pq-retro, /daily-pipeline, /growth-spec, /commit, /pq-score, /habit-watch, /life-design, /saboteur-audit, /insight-doc, /second-coach, /context-save, /context-restore — and says that /pq is the front door when unsure which to use.
+
+(The skills use the `pq` prefix — Positive Intelligence Quotient, the book's name for the percentage of time your mind serves you rather than sabotages you.)
+
+### Step 2: First session
+
+```
+/sage-session
+```
+
+Bring something real — a challenge with weight, however half-formed. The Sage takes it from there.
+
+## See it work
+
+```
+You:  /intercept my coworker got promoted and I feel worthless
+
+Spotter:  That word "worthless" — let's trace where it came from.
+          What's the actual sentence running in your head, word for word?
+
+You:  "she's two years younger and already ahead of me"
+
+Spotter:  Two patterns in that sentence. The comparison clock — that's the
+          Hyper-Achiever (the pattern that pegs your worth to external
+          scorekeeping). And "worthless" is the Judge delivering the verdict.
+          The lie: her promotion is a measurement of you. It feels like data.
+          It's machinery — the same machinery would have produced the same
+          sentence about whoever got promoted.
+
+          Next time a promotion email lands — anyone's — ten seconds on your
+          feet on the floor before your mind gets the microphone.
+          Want me to log this interception?
+```
+
+## The practice
+
+The daily loop, as a team:
+
+| Time | Command | Coach | What happens |
+|---|---|---|---|
+| Morning | `/daily-pipeline` | The Trainer | One intention, a saboteur forecast for the day's terrain, first rep |
+| In the moment | `/intercept` | The Spotter | Trace a stinging thought: trigger → saboteur → the lie → the need. Rep prescribed, interception logged |
+| Evening | `/pq-retro` | The Witness | Five minutes: what triggered, what got caught, rep count, one Sage win. Writes the journal |
+| Anytime | `/sage-session` | The Sage | The flagship — any life challenge, walked through all five Sage powers |
+
+The 21-day arc, when something deserves real practice:
+
+| Step | Command | What happens |
 |---|---|---|
-| `/sage-session` | The Sage | **The flagship.** A guided session on any life challenge — diagnoses the active saboteurs, then walks all five Sage powers. Start here. |
-| `/intercept` | The Spotter | Trace one stinging thought to its root: trigger → saboteur → the lie → the need underneath. Ends with a rep prescription, logged. |
-| `/saboteur-scan` | The Spotter | Report-only scan of a draft, journal entry, or situation. Names saboteurs, quotes evidence, fixes nothing. |
-| `/saboteur-audit` | The Spotter | The full survey: all 10 saboteurs assessed against your recent week, ranked by activity, Judge first. |
-| `/pq-retro` | The Witness | Daily or weekly debrief: triggers, interceptions, rep count, one Sage win. Writes the journal entry. |
-| `/habit-watch` | The Witness | Mid-practice check-ins; catches drift early and re-fits the practice, judgment-free. |
-| `/commit` | The Witness | Closes a 21-day practice: reviews what actually happened, writes the closing entry, marks it committed. |
-| `/daily-pipeline` | The Trainer | Morning: one intention + a saboteur forecast + first rep. Evening: hands off to `/pq-retro`. |
-| `/pq-score` | The Trainer | The dashboard: 7-day rep trend, interception rate, pattern tallies, self-assessed PQ — from real journal data. |
-| `/growth-spec` | The Navigator | Turns a vague intention ("be more patient with my kids") into a concrete 21-day practice with triggers and check-ins. |
-| `/navigate-review` | The Navigator | Pressure-tests a plan: concrete? sequenced? value-aligned? saboteur-proofed? |
-| `/life-design` | The Navigator | Designs your personal operating system: morning shape, rep triggers, environment defaults. |
-| `/sage-perspective` | The Sage | Big-decision review: where the Judge distorts it, the three gifts, the flash-forward test. |
-| `/insight-doc` | The Witness | Writes a breakthrough up as a keeper doc — practice guide or explanation — before it fades. |
-| `/second-coach` | (second voice) | A more direct second take on the same situation. Pushes harder; still never the Judge. |
-| `/context-save` `/context-restore` | — | Pause and resume coaching threads across sessions. |
-| `/pq` | The Sage | The front door — brings you to the right room. |
+| 1 | `/growth-spec` | A vague intention ("be more patient with my kids") becomes a concrete 21-day practice: trigger inventory, daily reps anchored to real moments, check-ins |
+| 2 | `/habit-watch` | Scheduled look-ins; catches drift while the fix is still one sentence |
+| 3 | `/commit` | Day 21: the honest review, the closing entry, the commitment marked. No grades — what happened, what it taught, what's next |
 
-## Install
+### Which coach should I ask?
 
-```bash
-git clone <your-fork-url> pq-stack && cd pq-stack
-./setup
-```
+| Situation | Command |
+|---|---|
+| A whole situation with weight | `/sage-session` |
+| One specific moment that stung | `/intercept` |
+| "Check this draft/entry before I send it" — no fixes wanted | `/saboteur-scan` |
+| A decision I keep flip-flopping on | `/sage-perspective` |
+| "Will this plan actually stick?" | `/navigate-review` |
+| "Map all my patterns" — the wide view | `/saboteur-audit` |
+| "How am I doing?" — numbers from real data | `/pq-score` |
+| Design my mornings / environment from scratch | `/life-design` |
+| Something just clicked — keep it | `/insight-doc` |
+| "Push back on me harder" | `/second-coach` |
+| Not sure | `/pq` |
 
-Requires [bun](https://bun.sh) and [Claude Code](https://docs.claude.com/en/docs/claude-code). `./setup` symlinks the skills into `~/.claude/skills/`, creates the private data home, and smoke-tests the journal. `./setup --uninstall` removes the symlinks and never touches your data.
+### Power tools
 
-## Quickstart — your first week
-
-1. Install PQ Stack (30 seconds — see above)
-2. Run `/sage-session` — bring one real challenge, however half-formed
-3. Run `/intercept` the next time a thought stings — trace it, get your rep
-4. Run `/pq-retro` tonight — two minutes; it writes your first journal entry
-5. Run `/pq-score` after a few days — watch your trend fill in from real data
-
-When something's worth 21 days: `/growth-spec` turns the intention into a practice, `/habit-watch` checks in along the way, `/commit` closes it out. Lost? `/pq` is the front door.
-
-## Your data and your privacy
-
-Everything personal lives in `~/.pq/`, owner-only (0700/0600), local-only:
-
-- `journal/entries.jsonl` — retros and session summaries
-- `journal/saboteurs.jsonl` — every labeled interception: trigger, the lie, what you did
-- `journal/commitments.jsonl` — growth-specs and their status (open / practicing / committed)
-- `config.yaml` — your preferences (name, wake_time, rep_target, checkin_cadence, explain_level)
-- `sessions/`, `docs/` — saved threads and keeper documents
-
-The journal is append-only and event-sourced: records are superseded, never edited, and **redaction is honored absolutely** — ask any coach to forget something (or run `pq-journal-log <stream> --redact <id>`) and the record is expunged completely, archive included. A write-time guard refuses credential-shaped secrets, and nothing in this repo ever sends journal content to any remote or external service. There are no external sinks.
-
-CLI access to your own data:
+Your data, on the command line (all local, all yours):
 
 ```bash
-~/.claude/skills/pq/bin/pq-journal-search --days 7            # this week
-~/.claude/skills/pq/bin/pq-journal-search --stats --days 7    # the /pq-score numbers
-~/.claude/skills/pq/bin/pq-config list                        # your preferences
+~/.claude/skills/pq/bin/pq-journal-search --days 7           # this week's interceptions, entries, commitments
+~/.claude/skills/pq/bin/pq-journal-search --stats --days 7   # per-day reps, interception rate, saboteur tallies
+~/.claude/skills/pq/bin/pq-journal-log saboteurs '{...}'     # log an interception by hand
+~/.claude/skills/pq/bin/pq-journal-log entries --redact <id> # forget a record — expunged completely, archive included
+~/.claude/skills/pq/bin/pq-config list                       # your preferences (name, rep_target, cadence, explain_level)
 ```
 
-## How it's built
+The journal is event-sourced and append-only: three streams under `~/.pq/journal/` (`entries.jsonl`, `saboteurs.jsonl`, `commitments.jsonl`), supersede-don't-delete, redact-on-demand. A write-time guard refuses credential-shaped secrets. `/pq-score` and `/saboteur-audit` read this data — nothing is ever estimated.
 
-Each skill is a directory with a `SKILL.md.tmpl` template; `bun run gen:skill-docs` resolves shared `{{PLACEHOLDERS}}` — the coach preamble (personas, the anti-Judge rule, scope-and-safety), the canonical 10-saboteur table, the 5 Sage powers, the rep menu, journal invocations — into the generated `SKILL.md` that Claude Code loads. Edit templates, never generated files. One source of truth means the saboteur canon literally cannot drift between skills: the same table that renders the docs validates the journal writes.
+## Uninstall
 
-The non-negotiables, enforced by `bun test`:
-
-- **The coach is never the Judge.** No "you should have", no scorekeeping shame, no streak-loss mechanics. Missed days get curiosity. A static scan rejects bare Judge-voice in any generated skill, and a gated LLM eval (`bun run test:evals`, needs `ANTHROPIC_API_KEY`) audits transcripts for it.
-- **The canon is the canon.** Exactly 10 saboteurs, exactly 5 Sage powers — never an invented eleventh or sixth.
-- **Safety inheritance.** Every skill carries the scope-and-safety block: not therapy; crisis/trauma/clinical territory stops the framework and gets plain human warmth plus a professional referral; clinical symptoms are never labeled as saboteurs.
-- **Platform-agnostic personalization.** Skills never hardcode your routine; they read `~/.pq/config.yaml` and ask once when something's missing.
-
-See `CLAUDE.md` for contributor docs and `ETHOS.md` for the operating philosophy.
-
-## Development
+### Option 1: Run the uninstall script
 
 ```bash
-bun run gen:skill-docs          # regenerate SKILL.md from templates
-bun run gen:skill-docs:check    # CI freshness check (--dry-run)
-bun test                        # free, static suite — always green before commit
-bun run test:evals              # gated LLM judge eval (paid, optional)
+~/.claude/skills/pq/setup --uninstall
 ```
 
-## Honesty note
+Removes the skill symlinks. Your journal and config in `~/.pq` are never touched — that data is yours, including after you leave.
 
-*Positive Intelligence* is a practice framework many people find useful. PQ Stack implements the practice; it makes no clinical claims, and neither should you expect it to. If you're dealing with something heavier than habits and patterns, a professional is the right person — the coaches will tell you the same.
+### Option 2: Manual removal
+
+```bash
+# 1. Remove the skills
+rm -rf ~/.claude/skills/pq
+for s in pq sage-session intercept saboteur-scan sage-perspective navigate-review \
+         pq-retro daily-pipeline growth-spec commit pq-score habit-watch life-design \
+         saboteur-audit insight-doc second-coach context-save context-restore; do
+  [ -L ~/.claude/skills/$s ] && rm ~/.claude/skills/$s
+done
+
+# 2. Only if you also want your journal gone (irreversible — it's your history):
+# rm -rf ~/.pq
+```
+
+## Docs
+
+- [CLAUDE.md](CLAUDE.md) — contributor guide: the pipeline, the iron rules, how to write a skill
+- [ETHOS.md](ETHOS.md) — the operating philosophy: label don't fight; ten seconds at a time; every setback is a gift; the coach is never the Judge
+- [CHANGELOG.md](CHANGELOG.md) — versions, starting fresh at 1.0.0.0
+
+## Privacy
+
+There is no telemetry. None, not opt-out — none exists. Everything personal lives in `~/.pq/` with owner-only permissions (0700 directories, 0600 files), never pushed to any remote, never sent to any service. Redaction is honored absolutely: ask any coach to forget something and the record is expunged from the live log *and* the archive. The test suite enforces that no external sink can quietly appear.
+
+## Troubleshooting
+
+- **Skills don't show up in Claude Code** — re-run `~/.claude/skills/pq/setup`; check that `~/.claude/skills/sage-session` is a symlink pointing into the install.
+- **`bun: command not found`** — install [Bun](https://bun.sh), then re-run `./setup`.
+- **A coach sounds like the Judge** — that's a bug in the product, not a feature of honesty. Open an issue with the transcript line; the anti-Judge rule is the product.
+
+## Intelligence Emotions
+
+Exactly 10 saboteurs. Exactly 5 Sage powers. Never an invented eleventh or sixth — the test suite enforces the canon. The team: the Sage (lead coach), the Spotter (pattern recognition), the Trainer (rep drills), the Navigator (plans and direction), the Witness (reflection). One rule outranks everything they say: **no coach is ever the Judge.**
 
 ## License
 
-MIT. Positive Intelligence, the saboteur names, and the Sage model are Shirzad Chamine's work — read the book; it's the manual this team coaches from.
+MIT. The Positive Intelligence model — the saboteurs, the Sage powers, PQ reps — is Shirzad Chamine's work; [read the book](https://www.positiveintelligence.com/book/), it's the manual this team coaches from. Architecture forked from [gstack](https://github.com/garrytan/gstack) (MIT), gratefully.
