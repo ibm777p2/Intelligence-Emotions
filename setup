@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+# PQ Stack setup — installs the coaching skills into ~/.claude/skills/
+# and prepares the private data home at ~/.pq.
+#
+# Usage:
+#   ./setup              install (or refresh) all skills
+#   ./setup --uninstall  remove the symlinks (your ~/.pq data is never touched)
+#
+# What install does:
+#   1. ~/.claude/skills/pq         → symlink to this repo (root skill + bin/ + scripts/)
+#   2. ~/.claude/skills/<skill>    → symlink per skill directory
+#   3. ~/.pq created 0700 (journal/, sessions/, docs/, state/)
+#   4. bins made executable, smoke-tested
+#
+# Privacy: everything personal lives in ~/.pq — owner-only, local-only,
+# never synced or pushed anywhere by anything in this repo.
+
+set -euo pipefail
+
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILLS_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
+PQ_HOME="${PQ_HOME:-$HOME/.pq}"
+
+SKILLS=(
+  sage-session intercept saboteur-scan sage-perspective navigate-review
+  pq-retro daily-pipeline growth-spec commit pq-score habit-watch
+  life-design saboteur-audit insight-doc second-coach context-save context-restore
+)
+
+say()  { printf '%s\n' "$*"; }
+fail() { printf 'setup: %s\n' "$*" >&2; exit 1; }
+
+# ─── uninstall ────────────────────────────────────────────────
+if [[ "${1:-}" == "--uninstall" ]]; then
+  removed=0
+  for name in pq "${SKILLS[@]}"; do
+    link="$SKILLS_DIR/$name"
+    if [[ -L "$link" ]]; then
+      target="$(readlink "$link")"
+      case "$target" in
+        "$REPO_DIR"*) rm "$link"; removed=$((removed+1));;
+      esac
+    fi
+  done
+  say "Removed $removed PQ Stack symlinks from $SKILLS_DIR."
+  say "Your journal and config in $PQ_HOME were not touched (and never will be by this script)."
+  exit 0
+fi
+
+# ─── preflight ────────────────────────────────────────────────
+command -v bun >/dev/null 2>&1 || fail "bun is required (the journal bins run on it). Install: https://bun.sh"
+
+for name in "${SKILLS[@]}"; do
+  [[ -f "$REPO_DIR/$name/SKILL.md" ]] || fail "$name/SKILL.md missing — run: bun run gen:skill-docs"
+done
+[[ -f "$REPO_DIR/SKILL.md" ]] || fail "root SKILL.md missing — run: bun run gen:skill-docs"
+
+# ─── private data home ────────────────────────────────────────
+mkdir -p "$PQ_HOME/journal" "$PQ_HOME/sessions" "$PQ_HOME/docs" "$PQ_HOME/state/disclosed"
+chmod 700 "$PQ_HOME" "$PQ_HOME/journal" "$PQ_HOME/sessions" "$PQ_HOME/docs" "$PQ_HOME/state" 2>/dev/null || true
+
+# ─── bins ─────────────────────────────────────────────────────
+chmod +x "$REPO_DIR/bin/"pq-* 2>/dev/null || true
+
+# ─── skill symlinks ───────────────────────────────────────────
+mkdir -p "$SKILLS_DIR"
+
+link_skill() {
+  local name="$1" target="$2" link="$SKILLS_DIR/$1"
+  if [[ -L "$link" ]]; then
+    rm "$link"
+  elif [[ -e "$link" ]]; then
+    say "  SKIP $name — $link exists and is not a symlink (move it aside, then re-run)"
+    return 1
+  fi
+  ln -s "$target" "$link"
+  say "  ok   /$name"
+}
+
+say "Installing PQ Stack skills into $SKILLS_DIR:"
+link_skill pq "$REPO_DIR" || true
+for name in "${SKILLS[@]}"; do
+  link_skill "$name" "$REPO_DIR/$name" || true
+done
+
+# ─── smoke test ───────────────────────────────────────────────
+if PQ_HOME="$PQ_HOME" bun "$REPO_DIR/bin/pq-journal-search" --days 1 >/dev/null 2>&1; then
+  say "Journal bins: ok"
+else
+  fail "journal bin smoke test failed — try: bun $REPO_DIR/bin/pq-journal-search --days 1"
+fi
+
+say ""
+say "PQ Stack is installed. Your team:"
+say "  /sage-session     the Sage — work through any life challenge (start here)"
+say "  /intercept        the Spotter — trace one stinging thought to its saboteur"
+say "  /saboteur-scan    the Spotter — report-only scan of a draft or entry"
+say "  /pq-retro         the Witness — daily or weekly debrief"
+say "  /daily-pipeline   the Trainer — morning intention, evening hand-off"
+say "  /growth-spec      the Navigator — turn an intention into a 21-day practice"
+say "  ...and the rest: /pq, /sage-perspective, /navigate-review, /commit,"
+say "  /pq-score, /habit-watch, /life-design, /saboteur-audit, /insight-doc,"
+say "  /second-coach, /context-save, /context-restore"
+say ""
+say "Private data lives in $PQ_HOME (owner-only, local-only)."
+say "First session: open Claude Code and try /sage-session — bring something real."

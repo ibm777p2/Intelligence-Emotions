@@ -14,7 +14,7 @@
 *.sh         text eol=lf
 *.bash       text eol=lf
 
-# Extensionless executables (top-level setup script + bin/gstack-* helpers).
+# Extensionless executables (top-level setup script + bin/pq-* helpers).
 # These are bash scripts checked into git without a `.sh` suffix. Without
 # explicit eol=lf, Windows checkout with core.autocrlf=true converts them
 # to CRLF and breaks both `\n`-anchored regex tests (test/setup-codesign.test.ts)
