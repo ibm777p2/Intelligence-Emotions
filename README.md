@@ -39,7 +39,15 @@ git clone <your-fork-url> pq-stack && cd pq-stack
 
 Requires [bun](https://bun.sh) and [Claude Code](https://docs.claude.com/en/docs/claude-code). `./setup` symlinks the skills into `~/.claude/skills/`, creates the private data home, and smoke-tests the journal. `./setup --uninstall` removes the symlinks and never touches your data.
 
-First session: open Claude Code and run `/sage-session` — bring something real.
+## Quickstart — your first week
+
+1. Install PQ Stack (30 seconds — see above)
+2. Run `/sage-session` — bring one real challenge, however half-formed
+3. Run `/intercept` the next time a thought stings — trace it, get your rep
+4. Run `/pq-retro` tonight — two minutes; it writes your first journal entry
+5. Run `/pq-score` after a few days — watch your trend fill in from real data
+
+When something's worth 21 days: `/growth-spec` turns the intention into a practice, `/habit-watch` checks in along the way, `/commit` closes it out. Lost? `/pq` is the front door.
 
 ## Your data and your privacy
 
