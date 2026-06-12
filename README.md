@@ -28,7 +28,7 @@ This is not therapy or medical care. The coaches say so themselves, once, plainl
 
 Open Claude Code and paste this. Claude does the rest.
 
-> Install Intelligence Emotions: run **`git clone --single-branch --depth 1 https://github.com/YOUR-GITHUB-USERNAME/intelligence-emotions.git ~/.claude/skills/pq && cd ~/.claude/skills/pq && ./setup`** then add an "Intelligence Emotions" section to CLAUDE.md that lists the available skills: /pq, /sage-session, /intercept, /saboteur-scan, /sage-perspective, /navigate-review, /pq-retro, /daily-pipeline, /growth-spec, /commit, /pq-score, /habit-watch, /life-design, /saboteur-audit, /insight-doc, /second-coach, /context-save, /context-restore — and says that /pq is the front door when unsure which to use.
+> Install Intelligence Emotions: run **`git clone --single-branch --depth 1 https://github.com/ibm777p2/Intelligence-Emotions.git ~/.claude/skills/pq && cd ~/.claude/skills/pq && ./setup`** then add an "Intelligence Emotions" section to CLAUDE.md that lists the available skills: /pq, /sage-session, /intercept, /saboteur-scan, /sage-perspective, /navigate-review, /pq-retro, /daily-pipeline, /growth-spec, /commit, /pq-score, /habit-watch, /life-design, /saboteur-audit, /insight-doc, /second-coach, /context-save, /context-restore — and says that /pq is the front door when unsure which to use.
 
 (The skills use the `pq` prefix — your mental-fitness quotient, the percentage of time your mind serves you rather than sabotages you.)
 
